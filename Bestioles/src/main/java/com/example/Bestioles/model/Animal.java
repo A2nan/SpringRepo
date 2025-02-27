@@ -1,8 +1,7 @@
 package com.example.Bestioles.model;
 
 import jakarta.persistence.*;
-
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "animal")
@@ -17,36 +16,38 @@ public class Animal {
     @JoinColumn(name = "species_id")
     private Species species;
 
+    @ManyToMany(mappedBy = "animals")
+    private Set<Person> persons;
+
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Species getSpecies() {
-        return species;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Species getSpecies() {
+        return species;
     }
 
     public void setSpecies(Species species) {
         this.species = species;
     }
 
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", species=" + species +
-                '}';
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
     }
 }

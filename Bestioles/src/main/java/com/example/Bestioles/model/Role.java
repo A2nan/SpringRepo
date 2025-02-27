@@ -1,6 +1,7 @@
 package com.example.Bestioles.model;
 
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -11,5 +12,30 @@ public class Role {
 
     private String name;
 
-    // Getters & Setters
+    @ManyToMany(mappedBy = "roles")
+    private Set<Person> persons;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
+    }
 }
