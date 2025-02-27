@@ -8,9 +8,25 @@ import java.util.Set;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String name;
+    @Column(nullable = false)
+    private Integer age;
+
+    @Column(name = "firstname", nullable = false)
+    private String firstname;
+
+    @Column(name = "lastname", nullable = false)
+    private String lastname;
+
+    @Column(nullable = false, unique = true)
+    private String login;
+
+    @Column(nullable = false)
+    private String mdp;
+
+    @Column(name = "active", columnDefinition = "TINYINT(1)")
+    private Boolean active;
 
     @ManyToMany
     @JoinTable(
@@ -24,25 +40,64 @@ public class Person {
     @JoinTable(
             name = "person_animals", // Table intermédiaire pour Person - Animal
             joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "animal_id")
+            inverseJoinColumns = @JoinColumn(name = "animals_id")
     )
     private Set<Animal> animals;
 
-    // Getters & Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Set<Role> getRoles() {
